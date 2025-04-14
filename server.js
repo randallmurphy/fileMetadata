@@ -15,7 +15,7 @@ const upload = multer({ dest: 'uploads/' });
 
 app.use(express.json()); // Use built-in JSON parser
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public/index.html'))); // Serve static files
+app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
 
 // File upload endpoint
 // app.post('/api/upload', upload.single('upfile'), (req, res) => {
