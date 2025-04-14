@@ -13,7 +13,7 @@ const upload = multer({ dest: 'uploads/' });
 // Middleware
 app.use(express.json()); // Use built-in JSON parser
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
+app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
 
 // File upload endpoint
 app.post('/upload', upload.single('upfile'), (req, res) => {
@@ -31,7 +31,7 @@ app.post('/upload', upload.single('upfile'), (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
