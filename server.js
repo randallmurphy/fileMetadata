@@ -7,13 +7,15 @@ const multer = require('multer');
 
 dotenv.config();
 
+
 const app = module.exports = express();
 const upload = multer({ dest: 'uploads/' });
 
 // Middleware
+
 app.use(express.json()); // Use built-in JSON parser
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
+app.use(express.static(path.join(__dirname, 'public/index.html'))); // Serve static files
 
 // File upload endpoint
 // app.post('/api/upload', upload.single('upfile'), (req, res) => {
@@ -43,6 +45,8 @@ app.post('/api/upload', upload.single('upfile'), (req, res) => {
     console.log({ filename, mimetype, size });
 
     res.json({ filename, mimetype, size });
+
+    
 });
 
 // Start server
