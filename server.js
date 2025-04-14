@@ -16,18 +16,33 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
 
 // File upload endpoint
+// app.post('/api/upload', upload.single('upfile'), (req, res) => {
+//     if (!req.file) {
+//         return res.status(400).json({ message: 'No file uploaded' });
+//     }
+
+//     const { filename, mimetype, size } = req.file;
+
+//      res.json({
+//         filename,
+//         mimetype,
+//         size
+//     });
+
+//});
+
 app.post('/api/upload', upload.single('upfile'), (req, res) => {
+    console.log('Upload route hit');
     if (!req.file) {
+        console.log('No file uploaded');
         return res.status(400).json({ message: 'No file uploaded' });
     }
 
     const { filename, mimetype, size } = req.file;
 
-     res.json({
-        filename,
-        mimetype,
-        size
-    });
+    console.log({ filename, mimetype, size });
+
+    res.json({ filename, mimetype, size });
 });
 
 // Start server
