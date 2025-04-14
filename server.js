@@ -5,7 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const multer = require('multer');
 const bodyParser = require('body-parser');
-
+const logger = require('morgan');   
 dotenv.config();
 
 
@@ -13,6 +13,7 @@ const app = module.exports = express();
 const upload = multer({ dest: 'uploads/' });
 
 // Middleware
+app.use(logger('dev')); // Log requests to the console
 app.use(bodyParser.json()); // Use built-in JSON parser
 app.use(express.json()); // Use built-in JSON parser
 app.use(cors());
