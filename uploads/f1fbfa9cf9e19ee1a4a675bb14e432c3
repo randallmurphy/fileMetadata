@@ -44,11 +44,11 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res, next) => {
         return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    const { filename, mimetype, size } = req.file;
+    const { name, type, size } = req.file;
 
-    console.log({ filename, mimetype, size });
+    console.log({ name, type, size });
 
-    res.json({ name: filename, type: mimetype, size: size });
+    res.json({ "name": filename, "type": mimetype, "size": size });
     } catch (error) {
         console.log('error')
         return res.status(500).json({ message: 'Server error', error: error.message });
