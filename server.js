@@ -129,7 +129,7 @@ const upload = multer({ dest: 'uploads/' });
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
+app.post('/fileanalyse', upload.single('upfile'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
