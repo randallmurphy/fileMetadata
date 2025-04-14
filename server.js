@@ -35,7 +35,7 @@ app.use(cors());
 
 //});
 
-app.post('/api/:upload', upload.single('upfile'), (req, res, next) => {
+app.post('/api/upload', upload.single('upfile'), (req, res, next) => {
     console.log('Upload route hit');
     console.log(req.file); // Log the request body
     try {
