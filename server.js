@@ -16,7 +16,7 @@ const upload = multer({ dest: 'uploads/' });
 app.use(bodyParser.json()); // Use built-in JSON parser
 app.use(express.json()); // Use built-in JSON parser
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
+
 
 // File upload endpoint
 // app.post('/api/upload', upload.single('upfile'), (req, res) => {
@@ -49,7 +49,7 @@ app.post('/api/upload', upload.single('upfile'), (req, res, next) => {
 
     
 });
-
+app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
 // Start server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
