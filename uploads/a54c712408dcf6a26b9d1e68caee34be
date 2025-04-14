@@ -8,8 +8,8 @@
 <body>
     <form action="/upload" method="post" enctype="multipart/form-data">
         <label for="file">Please select a file</label>
-        <input type="file" name="upfile" >
-        <input type="submit" id="button" value="upload">
+        <input type="file" name="upfile" id="file">
+        <button type="submit">SUBMIT</button>
 
     </form>
 </body>

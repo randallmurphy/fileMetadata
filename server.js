@@ -7,7 +7,7 @@ const multer = require('multer');
 
 dotenv.config();
 
-const app = express();
+const app = module.exports = express();
 const upload = multer({ dest: 'uploads/' });
 
 // Middleware
