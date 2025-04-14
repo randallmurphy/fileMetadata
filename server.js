@@ -1,40 +1,76 @@
 
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');   
+const path = require('path');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const multer = require('multer');
-const path = require('path');
-const bodyParser = require('body-parser');
+
+dotenv.config();
+
+const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-const app = module.exports = express();
-dotenv.config();
-app.use(bodyParser.json());
+// Middleware
+app.use(express.json()); // Use built-in JSON parser
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, '/public')));
-
-// File upload endpoint (single file only)
+// File upload endpoint
 app.post('/upload', upload.single('upfile'), (req, res) => {
-    // return res.json(req.file); // Send back uploaded file info
+    if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded' });
+    }
 
-    // Extract file properties: name, type, and size
     const { filename, mimetype, size } = req.file;
 
-    // Respond with a JSON object containing file info
-    return res.json({
-        filename,    // The file's name
-        mimetype,    // The file's mime type (e.g., image/jpeg)
-        size         // The file's size in bytes
+    res.json({
+        filename,
+        mimetype,
+        size
     });
 });
 
 // Start server
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const cors = require('cors');   
+// const dotenv = require('dotenv');
+// const multer = require('multer');
+// const path = require('path');
+// const bodyParser = require('body-parser');
+// const upload = multer({ dest: 'uploads/' });
+
+// const app = module.exports = express();
+// dotenv.config();
+// app.use(bodyParser.json());
+// app.use(cors());
+
+// // Serve static files from the "public" directory
+// app.use(express.static(path.join(__dirname, '/public')));
+
+// // File upload endpoint (single file only)
+// app.post('/upload', upload.single('upfile'), (req, res) => {
+//     // return res.json(req.file); // Send back uploaded file info
+
+//     // Extract file properties: name, type, and size
+//     const { filename, mimetype, size } = req.file;
+
+//     // Respond with a JSON object containing file info
+//     return res.json({
+//         filename,    // The file's name
+//         mimetype,    // The file's mime type (e.g., image/jpeg)
+//         size         // The file's size in bytes
+//     });
+// });
+
+// // Start server
+// app.listen(3000, () => {
+//     console.log('Server is running on port 3000');
+// });
 
 // const express = require('express');
 // const mongoose = require('mongoose');
