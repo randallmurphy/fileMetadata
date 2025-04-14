@@ -1,3 +1,4 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');   
@@ -5,55 +6,82 @@ const dotenv = require('dotenv');
 const multer = require('multer');
 const path = require('path');
 const bodyParser = require('body-parser');
-const upload = multer({dest:'uploads/'});
-const yarn = require('yarn');
-const fs = require('fs');
+const upload = multer({ dest: 'uploads/' });
 
 const app = module.exports = express();
 dotenv.config();
 app.use(bodyParser.json());
 app.use(cors());
 
-
-//bootleg only for one file
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/public/index.html');
-// });
-
-// for multiple files
+// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, '/public')));
 
-
-
-app.post('/api/upload', upload.single('file'), (req, res, next) => {
-
-    return res.json(req.file); // file info
-
-    // console.log(req.file); // file info
-    // console.log(req.body); // other form data
-
-    // res.json({ message: 'File uploaded successfully', file: req.file });
+// File upload endpoint (single file only)
+app.post('/api/upload', upload.single('file'), (req, res) => {
+    return res.json(req.file); // Send back uploaded file info
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Start server
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
+
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const cors = require('cors');   
+// const dotenv = require('dotenv');
+// const multer = require('multer');
+// const path = require('path');
+// const bodyParser = require('body-parser');
+// const upload = multer({dest:'uploads/'});
+// const yarn = require('yarn');
+
+
+// const app = module.exports = express();
+// dotenv.config();
+// app.use(bodyParser.json());
+// app.use(cors());
+
+
+// //bootleg only for one file
+// // app.get('/', (req, res) => {
+// //     res.sendFile(__dirname + '/public/index.html');
+// // });
+
+// // for multiple files
+// app.use(express.static(path.join(__dirname, '/public')));
+
+
+
+// app.post('/api/upload', upload.single('file'), (req, res, next) => {
+
+//     return res.json(req.file); // file info
+
+//     // console.log(req.file); // file info
+//     // console.log(req.body); // other form data
+
+//     // res.json({ message: 'File uploaded successfully', file: req.file });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.listen(3000, () => {
+//     console.log('Server is running on port 3000');
+// });
 
 // const express = require('express');
 // const cors = require('cors');
