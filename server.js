@@ -54,27 +54,58 @@
 //     console.log('Server is running on port 3000');
 // });
 
+// const express = require('express');
+// const cors = require('cors');
+// const multer = require('multer');
+// const dotenv = require('dotenv');
+// const path = require('path');
+
+// dotenv.config();
+
+// const app = express();
+// const upload = multer({ dest: 'uploads/' });
+
+// app.use(cors());
+// app.use(express.static(path.join(__dirname, '/public')));
+
+// // POST route for file upload
+// app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
+//   if (!req.file) {
+//     return res.status(400).json({ error: 'No file uploaded' });
+//   }
+
+//   const { originalname, mimetype, size } = req.file;
+//   res.json({
+//     name: originalname,
+//     type: mimetype,
+//     size: size
+//   });
+// });
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const dotenv = require('dotenv');
 const path = require('path');
-
+const dotenv = require('dotenv');
 dotenv.config();
-
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')));
 
-// POST route for file upload
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
   const { originalname, mimetype, size } = req.file;
+
   res.json({
     name: originalname,
     type: mimetype,
@@ -84,5 +115,5 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
