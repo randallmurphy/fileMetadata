@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public/'))); // Serve static files
 
 // File upload endpoint
-app.post('/upload', upload.single('upfile'), (req, res) => {
+app.post('/api/upload', upload.single('upfile'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
