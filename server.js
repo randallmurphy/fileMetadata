@@ -1,39 +1,38 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');   
-// const dotenv = require('dotenv');
-// const multer = require('multer');
-// const path = require('path');
-// const bodyParser = require('body-parser');
-// const upload = multer({dest:'uploads/'});
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');   
+const dotenv = require('dotenv');
+const multer = require('multer');
+const path = require('path');
+const bodyParser = require('body-parser');
+const upload = multer({dest:'uploads/'});
 
 
-// const app = module.exports = express();
-// dotenv.config();
-// app.use(bodyParser.json());
-// app.use(cors());
+const app = module.exports = express();
+dotenv.config();
+app.use(bodyParser.json());
+app.use(cors());
 
 
-// //bootleg only for one file
-// // app.get('/', (req, res) => {
-// //     res.sendFile(__dirname + '/public/index.html');
-// // });
-
-// // for multiple files
-// app.use(express.static(path.join(__dirname, '/public')));
-
-
-
-// app.post('/upload', upload.single('file'), (req, res, next) => {
-
-//     return res.json(req.file); // file info
-
-//     // console.log(req.file); // file info
-//     // console.log(req.body); // other form data
-
-//     // res.json({ message: 'File uploaded successfully', file: req.file });
+//bootleg only for one file
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/public/index.html');
 // });
 
+// for multiple files
+app.use(express.static(path.join(__dirname, '/public')));
+
+
+
+app.post('/api/upload', upload.single('file'), (req, res, next) => {
+
+    return res.json(req.file); // file info
+
+    // console.log(req.file); // file info
+    // console.log(req.body); // other form data
+
+    // res.json({ message: 'File uploaded successfully', file: req.file });
+});
 
 
 
@@ -50,9 +49,10 @@
 
 
 
-// app.listen(3000, () => {
-//     console.log('Server is running on port 3000');
-// });
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
 
 // const express = require('express');
 // const cors = require('cors');
@@ -118,32 +118,32 @@
 //   console.log(`Server running on port ${PORT}`);
 // });
 
-const express = require('express');
-const cors = require('cors');
-const multer = require('multer');
-const path = require('path');
+// const express = require('express');
+// const cors = require('cors');
+// const multer = require('multer');
+// const path = require('path');
 
-const app = express();
-const upload = multer({ dest: 'uploads/' });
+// const app = express();
+// const upload = multer({ dest: 'uploads/' });
 
-app.use(cors());
-app.use(express.static(path.join(__dirname, '/public')));
+// app.use(cors());
+// app.use(express.static(path.join(__dirname, '/public')));
 
-app.post('/fileanalyse', upload.single('upfile'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
+// app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
+//   if (!req.file) {
+//     return res.status(400).json({ error: 'No file uploaded' });
+//   }
 
-  const { originalname, mimetype, size } = req.file;
+//   const { originalname, mimetype, size } = req.file;
 
-  res.json({
-    name: originalname,
-    type: mimetype,
-    size: size
-  });
-});
+//   res.json({
+//     name: originalname,
+//     type: mimetype,
+//     size: size
+//   });
+// });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
