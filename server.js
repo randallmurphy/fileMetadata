@@ -23,7 +23,7 @@ app.post('/api/upload', upload.single('upfile'), (req, res) => {
 
     const { filename, mimetype, size } = req.file;
 
-    return res.json({
+     res.json({
         filename,
         mimetype,
         size
