@@ -17,8 +17,18 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')));
 
 // File upload endpoint (single file only)
-app.post('/api/upload', upload.single('file'), (req, res) => {
-    return res.json(req.file); // Send back uploaded file info
+app.post('/upload', upload.single('upfile'), (req, res) => {
+    // return res.json(req.file); // Send back uploaded file info
+
+    // Extract file properties: name, type, and size
+    const { filename, mimetype, size } = req.file;
+
+    // Respond with a JSON object containing file info
+    return res.json({
+        filename,    // The file's name
+        mimetype,    // The file's mime type (e.g., image/jpeg)
+        size         // The file's size in bytes
+    });
 });
 
 // Start server
