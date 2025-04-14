@@ -36,9 +36,7 @@ app.use(cors());
 
 app.post('/api/upload', upload.single('upfile'), (req, res, next) => {
     console.log('Upload route hit');
-    console.log(req.file); // Log the request body
-    try {
-         if (!req.file) {
+    if (!req.file) {
         console.log('No file uploaded');
         return res.status(400).json({ message: 'No file uploaded' });
     }
@@ -48,11 +46,6 @@ app.post('/api/upload', upload.single('upfile'), (req, res, next) => {
     console.log({ filename, mimetype, size });
 
     res.json({ "name": filename, "type": mimetype, "size": size });
-    } catch (error) {
-        console.log('error')
-        return res.status(500).json({ message: 'Server error', error: error.message });
-    }
-   
 
     
 });
